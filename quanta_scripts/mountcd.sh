@@ -20,7 +20,8 @@ curl -X POST -H 'Content-Type: application/json' -H "Accept: application/json" -
 # Configure image
 sleep 2
 echo
-curl -H "Content-Type: application/json" -X POST -sk -u ''"${BMC_USERNAME}"'':''"${BMC_PASSWORD}"'' --data '{"Image": "'${ISO}'","TransferProtocolType": "HTTPS", "UserName": "none", "Password": "none"}' https://${BMC_ENDPOINT}/redfish/v1/Managers/BMC_0/VirtualMedia/CD1/Actions/VirtualMedia.InsertMedia
+# '{"Image": "'http://192.168.13.11/agent.aarch64.iso'","TransferProtocolType": "HTTPS", "UserName": "none", "Password": "none", "TransferMethod": "Stream", "Inserted": true, "WriteProtected": true}'
+curl -H "Content-Type: application/json" -X POST -sk -u ''"${BMC_USERNAME}"'':''"${BMC_PASSWORD}"'' --data '{"Image": "'${ISO}'","TransferProtocolType": "HTTPS", "UserName": "none", "Password": "none", "TransferMethod": "Stream", "Inserted": true, "WriteProtected": true}' https://${BMC_ENDPOINT}/redfish/v1/Managers/BMC_0/VirtualMedia/CD1/Actions/VirtualMedia.InsertMedia
 if [ $? -eq 0 ]; then
   # Mount image
   sleep 3
